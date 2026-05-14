@@ -460,6 +460,12 @@
       transition: filter .3s;
     }
 
+    .component-card a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
     .component-card:hover .card-img {
       filter: brightness(1) saturate(1.1);
     }
@@ -605,6 +611,13 @@
       object-fit: cover;
       transition: transform .5s, filter .5s;
       filter: brightness(.75) saturate(.8);
+    }
+
+    .gallery-item a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      height: 100%;
     }
 
     .gallery-item:hover img {
@@ -1074,10 +1087,13 @@
       <div class="components-grid">
 
         <div class="component-card reveal">
-          <img class="card-img"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/4_stroke_engine_diagram.jpg/640px-4_stroke_engine_diagram.jpg"
-            alt="Engine piston"
-            onerror="this.src='https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80'" />
+          <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/4_stroke_engine_diagram.jpg/640px-4_stroke_engine_diagram.jpg"
+            target="_blank">
+            <img class="card-img"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/4_stroke_engine_diagram.jpg/640px-4_stroke_engine_diagram.jpg"
+              alt="Engine piston"
+              onerror="this.src='https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80'" />
+          </a>
           <div class="card-body">
             <div class="card-num">COMPONENT / 01</div>
             <div class="card-title">Piston</div>
@@ -1087,9 +1103,11 @@
         </div>
 
         <div class="component-card reveal">
-          <img class="card-img" src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=600&q=80"
-            alt="Crankshaft"
-            onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80'" />
+          <a href="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=600&q=80" target="_blank">
+            <img class="card-img" src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=600&q=80"
+              alt="Crankshaft"
+              onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80'" />
+          </a>
           <div class="card-body">
             <div class="card-num">COMPONENT / 02</div>
             <div class="card-title">Crankshaft</div>
@@ -1099,9 +1117,11 @@
         </div>
 
         <div class="component-card reveal">
-          <img class="card-img" src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&q=80"
-            alt="Spark plug"
-            onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80'" />
+          <a href="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&q=80" target="_blank">
+            <img class="card-img" src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&q=80"
+              alt="Spark plug"
+              onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80'" />
+          </a>
           <div class="card-body">
             <div class="card-num">COMPONENT / 03</div>
             <div class="card-title">Spark Plug</div>
@@ -1111,8 +1131,11 @@
         </div>
 
         <div class="component-card reveal">
-          <img class="card-img" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80"
-            alt="Valves" onerror="this.src='https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80'" />
+          <a href="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80" target="_blank">
+            <img class="card-img" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80"
+              alt="Valves"
+              onerror="this.src='https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80'" />
+          </a>
           <div class="card-body">
             <div class="card-num">COMPONENT / 04</div>
             <div class="card-title">Valves</div>
@@ -1122,9 +1145,11 @@
         </div>
 
         <div class="component-card reveal">
-          <img class="card-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
-            alt="Connecting rod"
-            onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80'" />
+          <a href="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" target="_blank">
+            <img class="card-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
+              alt="Connecting rod"
+              onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80'" />
+          </a>
           <div class="card-body">
             <div class="card-num">COMPONENT / 05</div>
             <div class="card-title">Connecting Rod</div>
@@ -1134,9 +1159,11 @@
         </div>
 
         <div class="component-card reveal">
-          <img class="card-img" src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=600&q=80"
-            alt="Engine block"
-            onerror="this.src='https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80'" />
+          <a href="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=600&q=80" target="_blank">
+            <img class="card-img" src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=600&q=80"
+              alt="Engine block"
+              onerror="this.src='https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80'" />
+          </a>
           <div class="card-body">
             <div class="card-num">COMPONENT / 06</div>
             <div class="card-title">Engine Block & Head</div>
@@ -1162,7 +1189,9 @@
 
         <!-- PART 1 -->
         <div class="component-card reveal">
-          <img class="card-img" src="part1.jpeg" alt="Engine Housing">
+          <a href="part1.jpeg" target="_blank">
+            <img class="card-img" src="part1.jpeg" alt="Engine Housing">
+          </a>
           <div class="card-body">
             <div class="card-num">PART / 01</div>
             <div class="card-title">Crankcase Assembly</div>
@@ -1175,7 +1204,9 @@
 
         <!-- PART 2 -->
         <div class="component-card reveal">
-          <img class="card-img" src="part2.jpeg" alt="Cylinder Block">
+          <a href="part2.jpeg" target="_blank">
+            <img class="card-img" src="part2.jpeg" alt="Cylinder Block">
+          </a>
           <div class="card-body">
             <div class="card-num">PART / 02</div>
             <div class="card-title">Cylinder Block</div>
@@ -1187,7 +1218,9 @@
 
         <!-- PART 3 -->
         <div class="component-card reveal">
-          <img class="card-img" src="part3.jpeg" alt="Engine Cover">
+          <a href="part3.jpeg" target="_blank">
+            <img class="card-img" src="part3.jpeg" alt="Engine Cover">
+          </a>
           <div class="card-body">
             <div class="card-num">PART / 03</div>
             <div class="card-title">Engine Side Cover</div>
@@ -1199,7 +1232,9 @@
 
         <!-- PART 4 -->
         <div class="component-card reveal">
-          <img class="card-img" src="part4.jpeg" alt="Transmission Housing">
+          <a href="part4.jpeg" target="_blank">
+            <img class="card-img" src="part4.jpeg" alt="Transmission Housing">
+          </a>
           <div class="card-body">
             <div class="card-num">PART / 04</div>
             <div class="card-title">Transmission Housing</div>
@@ -1211,7 +1246,9 @@
 
         <!-- PART 5 -->
         <div class="component-card reveal">
-          <img class="card-img" src="part5.jpeg" alt="Cylinder Head">
+          <a href="part5.jpeg" target="_blank">
+            <img class="card-img" src="part5.jpeg" alt="Cylinder Head">
+          </a>
           <div class="card-body">
             <div class="card-num">PART / 05</div>
             <div class="card-title">Cylinder Head Section</div>
@@ -1223,7 +1260,9 @@
 
         <!-- PART 06 -->
         <div class="component-card reveal">
-          <img class="card-img" src="part6.jpeg" alt="BMW M57 Diesel Engine">
+          <a href="part6.jpeg" target="_blank">
+            <img class="card-img" src="part6.jpeg" alt="BMW M57 Diesel Engine">
+          </a>
           <div class="card-body">
             <div class="card-num">PART / 06</div>
             <div class="card-title">Cylinder Head Section</div>
@@ -1246,23 +1285,33 @@
 
       <div class="gallery-grid reveal">
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=85" alt="Engine bay" />
+          <a href="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=85" target="_blank">
+            <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=85" alt="Engine bay" />
+          </a>
           <div class="gallery-caption">V8 ENGINE BAY</div>
         </div>
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500&q=80" alt="Racecar engine" />
+          <a href="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500&q=80" target="_blank">
+            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500&q=80" alt="Racecar engine" />
+          </a>
           <div class="gallery-caption">HIGH PERFORMANCE</div>
         </div>
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=500&q=80" alt="Engine parts" />
+          <a href="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=500&q=80" target="_blank">
+            <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=500&q=80" alt="Engine parts" />
+          </a>
           <div class="gallery-caption">ENGINE COMPONENTS</div>
         </div>
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80" alt="Car mechanics" />
+          <a href="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80" target="_blank">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80" alt="Car mechanics" />
+          </a>
           <div class="gallery-caption">AUTOMOTIVE WORKSHOP</div>
         </div>
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=500&q=80" alt="Engine detail" />
+          <a href="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=500&q=80" target="_blank">
+            <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=500&q=80" alt="Engine detail" />
+          </a>
           <div class="gallery-caption">PRECISION ENGINEERING</div>
         </div>
       </div>
