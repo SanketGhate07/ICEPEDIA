@@ -789,6 +789,126 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* ─── SETTINGS / SLIDE BAR ─── */
+    #settingsToggle {
+      position: relative;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      padding: 6px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .nav-settings {
+      margin-left: 12px;
+    }
+
+    .hamburger {
+      display: inline-block;
+      width: 22px;
+      height: 18px;
+    }
+
+    .hamburger span {
+      display: block;
+      height: 2px;
+      background: var(--dim);
+      margin: 4px 0;
+      border-radius: 2px;
+      transition: background .18s;
+    }
+
+    #settingsToggle:hover .hamburger span {
+      background: var(--red);
+    }
+
+    .settings-panel {
+      position: fixed;
+      right: -340px;
+      top: 0;
+      height: 100%;
+      width: 320px;
+      background: var(--panel);
+      color: var(--text);
+      box-shadow: -18px 0 40px rgba(0, 0, 0, 0.6);
+      transition: right .35s ease;
+      z-index: 210;
+      padding: 28px 20px;
+      overflow-y: auto;
+    }
+
+    .settings-panel.open {
+      right: 0;
+    }
+
+    .settings-panel h3 {
+      font-family: 'Bebas Neue';
+      margin: 6px 0 14px;
+      color: var(--red);
+    }
+
+    .settings-section {
+      margin-top: 12px;
+    }
+
+    .appearance-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 12px 0;
+    }
+
+    .appearance-option label {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .appearance-option input[type="radio"] {
+      width: 18px;
+      height: 18px;
+    }
+
+    .settings-close {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      background: transparent;
+      border: none;
+      color: var(--dim);
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .settings-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s;
+      z-index: 205;
+    }
+
+    .settings-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Light theme overrides */
+    body[data-theme="light"] {
+      --darker: #f5f7fb;
+      --panel: #ffffff;
+      --text: #111111;
+      --dim: #556677;
+      --red: #b30000;
+      --steel: #e8eef6;
+      --accent: #111111;
+      background: var(--darker);
+    }
   </style>
 </head>
 
@@ -804,7 +924,35 @@
       <li><a href="#applications">Applications</a></li>
       <li><a href="#info">Info</a></li>
     </ul>
+    <button id="settingsToggle" aria-label="Open settings" class="nav-settings">
+      <span class="hamburger" aria-hidden>
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </button>
   </nav>
+
+  <!-- SETTINGS SLIDE BAR -->
+  <div id="settingsPanel" class="settings-panel" role="dialog" aria-label="Settings">
+    <button class="settings-close" id="settingsClose" aria-label="Close">✕</button>
+    <h3>Appearance</h3>
+    <div class="settings-section">
+      <div class="appearance-option">
+        <input type="radio" id="theme-auto" name="theme" value="auto">
+        <label for="theme-auto">System (auto)</label>
+      </div>
+      <div class="appearance-option">
+        <input type="radio" id="theme-dark" name="theme" value="dark">
+        <label for="theme-dark">Dark</label>
+      </div>
+      <div class="appearance-option">
+        <input type="radio" id="theme-light" name="theme" value="light">
+        <label for="theme-light">Light</label>
+      </div>
+    </div>
+  </div>
+  <div id="settingsOverlay" class="settings-overlay" aria-hidden="true"></div>
 
   <!-- HERO -->
   <section class="hero">
@@ -1509,6 +1657,66 @@
         a.style.color = a.getAttribute('href') === '#' + current ? '#ffffff' : '';
       });
     });
+  </script>
+
+  <script>
+    (function () {
+      const body = document.body;
+      const toggle = document.getElementById('settingsToggle');
+      const panel = document.getElementById('settingsPanel');
+      const closeBtn = document.getElementById('settingsClose');
+      const overlay = document.getElementById('settingsOverlay');
+      const radios = document.querySelectorAll('input[name="theme"]');
+
+      function openPanel() { panel.classList.add('open'); overlay.classList.add('show'); }
+      function closePanel() { panel.classList.remove('open'); overlay.classList.remove('show'); }
+
+      toggle.addEventListener('click', openPanel);
+      closeBtn.addEventListener('click', closePanel);
+      overlay.addEventListener('click', closePanel);
+
+      // Theme management
+      function applyTheme(name) {
+        if (name === 'auto' || !name) {
+          const prefers = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+          body.setAttribute('data-theme', prefers);
+        } else {
+          body.setAttribute('data-theme', name);
+        }
+      }
+
+      function saveTheme(name) {
+        if (!name || name === 'auto') localStorage.removeItem('site-theme');
+        else localStorage.setItem('site-theme', name);
+      }
+
+      // Initialize from storage or system
+      const stored = localStorage.getItem('site-theme');
+      if (stored) {
+        applyTheme(stored);
+        const sel = document.getElementById('theme-' + stored);
+        if (sel) sel.checked = true;
+      } else {
+        // select auto
+        const autoRadio = document.getElementById('theme-auto');
+        if (autoRadio) autoRadio.checked = true;
+        applyTheme('auto');
+      }
+
+      radios.forEach(r => {
+        r.addEventListener('change', (e) => {
+          const v = e.target.value;
+          if (v === 'auto') { applyTheme('auto'); saveTheme('auto'); }
+          else { applyTheme(v); saveTheme(v); }
+        });
+      });
+
+      // React to system changes when in auto
+      window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
+        const storedTheme = localStorage.getItem('site-theme');
+        if (!storedTheme || storedTheme === 'auto') applyTheme('auto');
+      });
+    })();
   </script>
 </body>
 
