@@ -100,9 +100,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, .08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, .08) 1px, transparent 1px);
+
       background-size: 60px 60px;
       animation: gridScroll 12s linear infinite;
     }
@@ -141,6 +139,7 @@
       position: relative;
       z-index: 1;
       animation: fadeDown .9s .1s ease both;
+      color: var(--text);
     }
 
     .hero h1 span {
@@ -157,6 +156,10 @@
       position: relative;
       z-index: 1;
       animation: fadeDown .9s .2s ease both;
+    }
+
+    body[data-theme="light"] .hero-sub {
+      color: #7a8899;
     }
 
     .hero-cta {
@@ -909,6 +912,10 @@
       --accent: #111111;
       background: var(--darker);
     }
+
+    body[data-theme="light"] .hero {
+      background: linear-gradient(135deg, #ffffff 0%, #f8faff 25%, #f0f6ff 50%, #ffffff 100%);
+    }
   </style>
 </head>
 
@@ -999,12 +1006,40 @@
         ctx.closePath();
       }
 
+      // Detect current theme
+      function getTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'dark';
+      }
+
+      // Get theme-aware colors
+      function getColors() {
+        var theme = getTheme();
+        if (theme === 'light') {
+          return {
+            bg: '#ffffff',
+            grid: 'rgba(0, 0, 0, 0.05)',
+            block: '#e8eef6',
+            blockStroke: '#d0d8e8',
+            bore: '#f0f4fa'
+          };
+        } else {
+          return {
+            bg: '#0b0f17',
+            grid: 'rgba(255, 255, 255, 0.03)',
+            block: '#1c2535',
+            blockStroke: '#2a3a50',
+            bore: '#070d18'
+          };
+        }
+      }
+
       function draw() {
+        var colors = getColors();
         ctx.clearRect(0, 0, 500, 520);
 
         // Background
-        ctx.fillStyle = '#0b0f17'; ctx.fillRect(0, 0, 500, 520);
-        ctx.strokeStyle = 'rgba(255,255,255,0.03)'; ctx.lineWidth = 1;
+        ctx.fillStyle = colors.bg; ctx.fillRect(0, 0, 500, 520);
+        ctx.strokeStyle = colors.grid; ctx.lineWidth = 1;
         for (var gx = 0; gx < 500; gx += 40) { ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, 520); ctx.stroke(); }
         for (var gy = 0; gy < 520; gy += 40) { ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(500, gy); ctx.stroke(); }
 
@@ -1023,11 +1058,11 @@
         var isFire = (strokeIdx === 2) && Math.sin(angle) < -0.7;
 
         // Engine block
-        ctx.fillStyle = '#1c2535'; ctx.strokeStyle = '#2a3a50'; ctx.lineWidth = 2;
+        ctx.fillStyle = colors.block; ctx.strokeStyle = colors.blockStroke; ctx.lineWidth = 2;
         rr(CX - 78, BORE_TOP - 32, 156, BORE_BOT - BORE_TOP + 64, 6); ctx.fill(); ctx.stroke();
 
         // Bore
-        ctx.fillStyle = '#070d18'; ctx.fillRect(CX - 58, BORE_TOP, 116, BORE_BOT - BORE_TOP);
+        ctx.fillStyle = colors.bore; ctx.fillRect(CX - 58, BORE_TOP, 116, BORE_BOT - BORE_TOP);
         var gl = ctx.createLinearGradient(CX - 58, 0, CX - 38, 0);
         gl.addColorStop(0, 'rgba(100,160,220,0.25)'); gl.addColorStop(1, 'rgba(100,160,220,0)');
         ctx.fillStyle = gl; ctx.fillRect(CX - 58, BORE_TOP, 20, BORE_BOT - BORE_TOP);
